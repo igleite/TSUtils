@@ -28,6 +28,34 @@ export class TimeUtils {
   }
 
   /**
+   * Formata um valor em segundos para o formato HH:mm:ss.
+   *
+   * @param {number} segundos - O valor em segundos a ser formatado.
+   * @returns {string} - O tempo formatado no formato HH:mm:ss.
+   * @throws {Error} - Lança um erro se o valor fornecido não for um número.
+   *
+   * @example
+   * TimeUtils.converterSegundosParaHHMMSS(3665); // Retorna "01:01:05"
+   */
+  public static converterSegundosParaHHMMSS(segundos: number): string {
+    try {
+      if (typeof segundos !== 'number' || isNaN(segundos) || segundos < 0) {
+        console.error('O valor deve ser um número positivo.');
+        return '00:00:00';
+      }
+
+      const horas: number = Math.floor(segundos / 3600);
+      const minutos: number = Math.floor((segundos % 3600) / 60);
+      const segundosRestantes: number = segundos % 60;
+
+      return `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundosRestantes.toString().padStart(2, '0')}`;
+    } catch (error) {
+      console.error('Error in converterSegundosParaHHMMSS:', error);
+      return '00:00:00';
+    }
+  }
+
+  /**
    * Converte segundos para minutos.
    *
    * @param {number} seconds - O valor em segundos a ser convertido.
