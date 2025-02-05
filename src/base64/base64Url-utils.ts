@@ -20,7 +20,7 @@ export class Base64UrlUtils {
    * @param {string} text - A string a ser codificada.
    * @returns {string} Uma string codificada em formato Base64 seguro para URLs.
    */
-  protected static encode(text: string): string {
+  public static encode(text: string): string {
     try {
       if (StringUtils.isNullOrEmpty(text)) {
         return StringUtils.Empty;
@@ -45,7 +45,7 @@ export class Base64UrlUtils {
    * @param {string} text - A string codificada a ser decodificada.
    * @returns {string} A string original decodificada.
    */
-  protected static decode(text: string): string {
+  public static decode(text: string): string {
     try {
       if (StringUtils.isNullOrEmpty(text)) {
         return StringUtils.Empty;

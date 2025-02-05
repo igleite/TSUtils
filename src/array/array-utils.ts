@@ -15,7 +15,7 @@ export class ArrayUtils {
    * const nestedArray = [1, [2, [3, 4]], 5];
    * const flatArray = ArrayUtils.flatMap(nestedArray); // [1, 2, 3, 4, 5]
    */
-  protected static flatMap<T>(array: any): T[] {
+  public static flatMap<T>(array: any): T[] {
     const valores: T[] = [];
 
     /**
@@ -133,7 +133,7 @@ export class ArrayUtils {
    *   id: value => value > 1
    * }); // [{ id: 2, name: 'Item 2', category: 'B' }, { id: 3, name: 'Another Item', category: 'C' }]
    */
-  protected static filterItemsSatisfying<T>(
+  public static filterItemsSatisfying<T>(
     items: T[],
     conditions: Partial<Record<keyof T, (value: T[keyof T]) => boolean>>
   ): T[] {
@@ -160,7 +160,7 @@ export class ArrayUtils {
    * const items = [1, 2, 3];
    * const total = ArrayUtils.totalItems(items); // 3
    */
-  protected static totalItems(items: Array<any>): number {
+  public static totalItems(items: Array<any>): number {
     try {
       if (FieldUtils.hasEmptyFields(items)) {
         return 0;

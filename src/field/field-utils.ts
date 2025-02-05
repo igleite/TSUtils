@@ -52,7 +52,7 @@ export class FieldUtils {
    *   { firstValue: 'example', secondaryValue: 'test' }
    * ); // false
    */
-  protected static areFieldsNotEqual(...fields: { firstValue: any; secondaryValue: any }[]): boolean {
+  public static areFieldsNotEqual(...fields: { firstValue: any; secondaryValue: any }[]): boolean {
     try {
       for (let i = 0; i < fields.length; i++) {
         if (fields[i].firstValue !== fields[i].secondaryValue) {
@@ -80,7 +80,7 @@ export class FieldUtils {
    * console.log(FieldUtils.areAllFieldsEmpty(campo1, campo2, campo3)); // Saída: false
    * console.log(FieldUtils.areAllFieldsEmpty(campo1, campo3)); // Saída: true
    */
-  protected static areAllFieldsEmpty(...fields: any[]): boolean {
+  public static areAllFieldsEmpty(...fields: any[]): boolean {
     try {
       for (const field of fields) {
         if (field !== null && field !== undefined && field !== '') {

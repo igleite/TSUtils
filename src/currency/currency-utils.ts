@@ -18,7 +18,7 @@ export class CurrencyUtils {
    * const decimal2 = CurrencyUtils.ToDecimal("100,00"); // 100.00
    * const decimal3 = CurrencyUtils.ToDecimal(null); // 0
    */
-  protected static ToDecimal(input: string | null): number {
+  public static ToDecimal(input: string | null): number {
     try {
       if (input === null) {
         return 0;
@@ -47,7 +47,7 @@ export class CurrencyUtils {
    * const price2 = CurrencyUtils.ToPrice(100); // "100,00"
    * const price3 = CurrencyUtils.ToPrice(null); // null
    */
-  protected static ToPrice(input: number | null): string | null {
+  public static ToPrice(input: number | null): string | null {
     try {
       let ret = (input) ? input.toString().replace('.', ',') : null;
       if (ret) {
