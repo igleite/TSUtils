@@ -1,6 +1,6 @@
 {
   "name": "@igleite/tsutils",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Uma coleção de utilitários em TypeScript para facilitar o desenvolvimento no dia a dia.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -33,7 +33,7 @@
     "conversao",
     "converter",
     "formatacao",
-    "datetie",
+    "datetime",
     "horario"
   ],
   "devDependencies": {
