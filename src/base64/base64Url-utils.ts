@@ -6,7 +6,7 @@ import {StringUtils} from "../string/string-utils";
  *
  * @see https://stackoverflow.com/a/60738564
  */
-export class Base64UrlHelper {
+export class Base64UrlUtils {
 
   /**
    * Codifica a string especificada em um formato Base64 seguro para URLs.

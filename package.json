@@ -1,0 +1,42 @@
+{
+  "name": "@igleite/tsutils",
+  "version": "1.0.1",
+  "description": "Uma coleção de utilitários em TypeScript para facilitar o desenvolvimento no dia a dia.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/igleite/TSUtils.git"
+  },
+  "author": "igleite",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/igleite/TSUtils/issues"
+  },
+  "homepage": "https://github.com/igleite/TSUtils#readme",
+  "keywords": [
+    "utils",
+    "typescript",
+    "angular",
+    "javascript",
+    "tempo",
+    "time",
+    "time-utils",
+    "date",
+    "hora",
+    "minuto",
+    "segundo",
+    "conversao",
+    "converter",
+    "formatacao",
+    "datetie",
+    "horario"
+  ],
+  "devDependencies": {
+    "typescript": "^4.0.0"
+  }
+}

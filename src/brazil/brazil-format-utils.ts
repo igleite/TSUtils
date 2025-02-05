@@ -5,6 +5,19 @@ import {StringUtils} from "../string/string-utils";
  */
 export class BrazilFormatUtils {
 
+  private static codigoPlacaMercosul: Map<number, string> = new Map([
+    [0, 'A'],
+    [1, 'B'],
+    [2, 'C'],
+    [3, 'D'],
+    [4, 'E'],
+    [5, 'F'],
+    [6, 'G'],
+    [7, 'H'],
+    [8, 'I'],
+    [9, 'J'],
+  ]);
+
   /**
    * Formata um valor numérico ou string como CPF ou CNPJ.
    *
@@ -114,6 +127,115 @@ export class BrazilFormatUtils {
     } catch (error) {
       console.error('Error in formatarTelefone:', error);
       return StringUtils.Empty;
+    }
+  }
+
+  /**
+   * Formata a placa de veículo para os formatos do Brasil ou Mercosul.
+   *
+   * Este método verifica se a placa é do tipo Brasil (com 3 letras e 4 números) ou Mercosul (com 3 letras, 1 número,
+   * 1 letra e 2 números). Em seguida, formata a placa conforme o padrão correspondente.
+   *
+   * @param {string} placa - A placa a ser formatada. Pode ser no formato Brasil ou Mercosul.
+   * @returns {string} - A placa formatada ou uma mensagem de erro se o formato for inválido.
+   *
+   * @example
+   * BrazilFormatUtils.formatarPlaca('ABC1234'); // Retorna 'ABC1234'
+   * BrazilFormatUtils.formatarPlaca('ABC1D12'); // Retorna 'ABC11212'
+   */
+  public static formatarPlaca(placa: string): string {
+    try {
+      if (this.isPlacaBrasil(placa)) {
+        return this.gerarPlacaBrasil(placa, 4);
+      } else if (this.isPlacaMercosul(placa)) {
+        return this.gerarPlacaMercosul(placa, 4);
+      } else {
+        return 'Formato inválido';
+      }
+    } catch (error) {
+      console.error('Error in formatarPlaca:', error);
+      return 'Erro na formatação';
+    }
+  }
+
+  /**
+   * Verifica se a placa fornecida está no formato de placa Brasil.
+   *
+   * O formato de placa Brasil é composto por 3 letras seguidas de 4 números (exemplo: ABC1234).
+   *
+   * @param {string} placa - A placa a ser verificada.
+   * @returns {boolean} - Retorna `true` se a placa estiver no formato Brasil, caso contrário `false`.
+   *
+   * @example
+   * BrazilFormatUtils.isPlacaBrasil('ABC1234'); // Retorna true
+   */
+  private static isPlacaBrasil(placa: string): boolean {
+    return /^[A-Z]{3}\d{4}$/.test(placa);
+  }
+
+  /**
+   * Verifica se a placa fornecida está no formato de placa Mercosul.
+   *
+   * O formato de placa Mercosul é composto por 3 letras, 1 número, 1 letra e 2 números (exemplo: ABC1D12).
+   *
+   * @param {string} placa - A placa a ser verificada.
+   * @returns {boolean} - Retorna `true` se a placa estiver no formato Mercosul, caso contrário `false`.
+   *
+   * @example
+   * BrazilFormatUtils.isPlacaMercosul('ABC1D12'); // Retorna true
+   */
+  private static isPlacaMercosul(placa: string): boolean {
+    return /^[A-Z]{3}\d[A-Z]\d{2}$/.test(placa);
+  }
+
+  /**
+   * Gera a placa no formato Brasil, substituindo o dígito numérico pela letra correspondente.
+   *
+   * Este método pega a placa e substitui o dígito numérico pela letra correspondente no Map de `codigoPlacaMercosul`.
+   *
+   * @param {string} placa - A placa a ser gerada.
+   * @param {number} pos - A posição do dígito que deve ser substituído pela letra.
+   * @returns {string} - A placa gerada com a letra correspondente.
+   *
+   * @example
+   * BrazilFormatUtils.gerarPlacaBrasil('ABC1234', 4); // Retorna 'ABC1234'
+   */
+  private static gerarPlacaBrasil(placa: string, pos: number): string {
+    return (
+        placa.substring(0, pos) +
+        this.codigoPlacaMercosul.get(parseInt(placa[pos])) +
+        placa.substring(pos + 1)
+    );
+  }
+
+  /**
+   * Gera a placa no formato Mercosul, substituindo a letra pela correspondente ao número.
+   *
+   * Este método pega a letra da placa e substitui por um número correspondente, de acordo com o Map de `codigoPlacaMercosul`.
+   *
+   * @param {string} placa - A placa a ser gerada.
+   * @param {number} pos - A posição da letra que deve ser substituída pelo número.
+   * @returns {string} - A placa gerada com o número correspondente à letra.
+   *
+   * @example
+   * BrazilFormatUtils.gerarPlacaMercosul('ABC1D12', 4); // Retorna 'ABC11212'
+   */
+  private static gerarPlacaMercosul(placa: string, pos: number): string {
+    const letra = placa[pos];
+    let segundoDigito: number | undefined;
+
+    // Encontrar o valor do segundo dígito correspondente à letra
+    for (let [key, value] of this.codigoPlacaMercosul) {
+      if (value === letra) {
+        segundoDigito = key;
+        break;
+      }
+    }
+
+    if (segundoDigito !== undefined) {
+      return placa.substring(0, pos) + segundoDigito + placa.substring(pos + 1);
+    } else {
+      throw new Error('Letra não encontrada para o segundo dígito');
     }
   }
 
