@@ -162,4 +162,26 @@ export class DateUtils {
   private static _formatDayOrMonth(month: number): string | number {
     return month < 10 ? `0${month}` : month;
   }
+
+  /**
+   * Formata uma data para o padrão "yyyy-MM".
+   *
+   * @param {Date} date - A data a ser formatada.
+   * @returns {string} - A data formatada no padrão "yyyy-MM".
+   *
+   * @example
+   * const date = new Date('2023-09-21');
+   * const formatted = DateUtils.getYearMonthString(date);
+   * console.log(formatted); // "2023-09"
+   */
+  public static getYearMonthString(date: Date): string {
+    try {
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1; // getMonth() retorna 0-11
+      return `${year}-${this._formatDayOrMonth(month)}`;
+    } catch (error) {
+      console.error('Error in getYearMonthString:', error);
+      return '';
+    }
+  }
 }
