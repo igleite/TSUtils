@@ -20,7 +20,7 @@ export class StringUtils {
    * const result3 = StringUtils.isNullOrEmpty('test'); // false
    * const result4 = StringUtils.isNullOrEmpty(undefined); // true
    */
-  public static isNullOrEmpty(value: string): boolean {
+  public static isNullOrEmpty(value: string | undefined | null): boolean {
     try {
       return value === undefined || value === null || value?.trim() === '';
     } catch (error) {
