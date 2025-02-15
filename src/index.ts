@@ -6,3 +6,4 @@ export * from './date/date-utils';
 export * from './field/field-utils';
 export * from './string/string-utils';
 export * from './time/time-utils';
+export * from './result/result';
