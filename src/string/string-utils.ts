@@ -48,4 +48,25 @@ export class StringUtils {
       return StringUtils.Empty;
     }
   }
+
+  /**
+ * Converte a primeira letra de uma string para maiúscula.
+ * @param {string} value - A string a ser capitalizada.
+ * @returns {string} A string com a primeira letra em maiúscula.
+ *
+ * @example
+ * const result1 = StringUtils.capitalize('hello'); // 'Hello'
+ * const result2 = StringUtils.capitalize('world'); // 'World'
+ * const result3 = StringUtils.capitalize('typescript'); // 'Typescript'
+ * const result4 = StringUtils.capitalize('JAVASCRIPT'); // 'Javascript'
+ * const result5 = StringUtils.capitalize(''); // ''
+ */
+  public static capitalize(value: string): string {
+    try {
+      return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+    } catch (error) {
+      console.error('Error in capitalize:', error);
+      return StringUtils.Empty;
+    }
+  }
 }
